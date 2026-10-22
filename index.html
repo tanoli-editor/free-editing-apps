@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TANOLI STUDIO — Ultra Premium Metallic Vault</title>
+
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif']
+          },
+          colors: {
+            metallic: {
+              gold: '#D4AF37',
+              goldLight: '#FFF2B2',
+              goldDark: '#997A15',
+              bronze: '#A37033'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Ultra-Realistic Light Metallic Ambient Background */
+    body {
+      background: radial-gradient(circle at 50% 10%, #F4F8F5 0%, #E2ECE5 45%, #D0DFD6 100%);
+      color: #1E293B;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Metallic Heavy Glassmorphism Panel */
+    .metallic-glass {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 20px 50px -15px rgba(15, 60, 40, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Metallic Gold & Emerald Buttons */
+    .btn-metallic-gold {
+      background: linear-gradient(135deg, #FFE89C 0%, #D4AF37 50%, #A07C1C 100%);
+      color: #1A1300;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+        0 10px 22px -5px rgba(180, 140, 30, 0.4);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-metallic-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+        0 14px 28px -5px rgba(180, 140, 30, 0.55);
+    }
+
+    .btn-metallic-emerald {
+      background: linear-gradient(135deg, #34D399 0%, #059669 50%, #024E37 100%);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.6),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+        0 10px 22px -5px rgba(5, 150, 105, 0.38);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-metallic-emerald:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.35),
+        0 14px 28px -5px rgba(5, 150, 105, 0.5);
+    }
+
+    .btn-metallic-silver {
+      background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #CBD5E1 100%);
+      color: #0F172A;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 1),
+        inset 0 -2px 3px rgba(0, 0, 0, 0.15),
+        0 8px 18px -4px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+    }
+    .btn-metallic-silver:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
+    }
+
+    /* Metallic Border Card */
+    .card-metallic {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+    .card-metallic:hover {
+      border-color: rgba(212, 175, 55, 0.8);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.2);
+    }
+
+    .drawer-open { transform: translateX(0%); }
+    .drawer-closed { transform: translateX(-100%); }
+  </style>
+</head>
+
+<body class="font-sans antialiased selection:bg-amber-300 selection:text-amber-950 flex flex-col justify-between min-h-screen">
+
+  <!-- PAGE LOADING OVERLAY -->
+  <div id="pageLoader" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="metallic-glass p-6 rounded-3xl flex items-center gap-3.5 shadow-2xl border border-white/80">
+      <i data-lucide="loader-2" class="w-6 h-6 animate-spin text-amber-600"></i>
+      <span class="text-xs font-bold text-slate-900 tracking-wider uppercase">Loading Vault Engine...</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="w-full sticky top-0 z-40 metallic-glass border-b border-white/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
+      
+      <!-- LOGO -->
+      <a href="javascript:void(0)" onclick="navigateTo('dashboard')" class="flex items-center gap-3 group">
+        <div id="siteLogoContainer" class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 flex items-center justify-center text-slate-950 font-display font-extrabold text-2xl shadow-md overflow-hidden shrink-0 border border-white/60">
+          T
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-black text-xl tracking-tight text-slate-900 leading-none">
+            TANOLI <span class="text-amber-600">STUDIO</span>
+          </span>
+          <span class="text-[9px] uppercase tracking-widest font-extrabold text-emerald-800 mt-1">Metallic Pro Vault</span>
+        </div>
+      </a>
+
+      <!-- NAVIGATION BAR -->
+      <nav class="hidden md:flex items-center gap-1.5 bg-white/40 p-1.5 rounded-2xl border border-white/80 shadow-inner">
+        <button onclick="navigateTo('dashboard')" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition-all btn-metallic-gold" data-page="dashboard">Dashboard</button>
+        <button onclick="navigateTo('apks')" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-800 hover:bg-white/80 transition-all" data-page="apks">Pro APKs</button>
+        <button onclick="navigateTo('courses')" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-800 hover:bg-white/80 transition-all" data-page="courses">Masterclasses</button>
+      </nav>
+
+      <!-- SEARCH & AUTH -->
+      <div class="flex items-center gap-3">
+        <div class="relative hidden sm:block w-48 lg:w-60">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"></i>
+          <input 
+            type="text" 
+            placeholder="Search vault..." 
+            oninput="handleSearch(this.value)"
+            class="w-full bg-white/70 border border-white/90 focus:border-amber-500 focus:bg-white rounded-2xl pl-9 pr-4 py-2 text-xs text-slate-900 placeholder-slate-500 outline-none transition-all shadow-inner"
+          />
+        </div>
+
+        <div id="desktopAuthContainer"></div>
+
+        <button onclick="toggleMobileDrawer()" class="md:hidden p-2.5 rounded-2xl metallic-glass text-slate-800 hover:bg-white">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE SIDE MENU -->
+  <div id="mobileDrawerBackdrop" onclick="toggleMobileDrawer()" class="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-50 hidden"></div>
+  <aside id="mobileDrawer" class="fixed top-0 left-0 bottom-0 w-72 bg-white/95 backdrop-blur-2xl z-50 p-6 shadow-2xl flex flex-col justify-between drawer-closed transition-transform duration-300 border-r border-amber-200 md:hidden">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-amber-200">
+        <span class="font-display font-black text-lg text-slate-900">TANOLI <span class="text-amber-600">STUDIO</span></span>
+        <button onclick="toggleMobileDrawer()" class="p-2 rounded-xl bg-slate-100 text-slate-600">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <nav class="mt-6 space-y-2 text-xs font-bold text-slate-800">
+        <button onclick="mobileNav('dashboard')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-amber-100/60">
+          <i data-lucide="layout-grid" class="w-4 h-4 text-amber-600"></i> Dashboard
+        </button>
+        <button onclick="mobileNav('apks')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-amber-100/60">
+          <i data-lucide="download" class="w-4 h-4 text-amber-600"></i> Pro APKs
+        </button>
+        <button onclick="mobileNav('courses')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-amber-100/60">
+          <i data-lucide="film" class="w-4 h-4 text-amber-600"></i> Masterclasses
+        </button>
+        <button onclick="mobileNav('login')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-amber-100/60">
+          <i data-lucide="log-in" class="w-4 h-4 text-amber-600"></i> Login Page
+        </button>
+        <button onclick="mobileNav('signup')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-amber-100/60">
+          <i data-lucide="user-plus" class="w-4 h-4 text-amber-600"></i> Sign Up Page
+        </button>
+        <button onclick="mobileNav('privacy')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-amber-100/60">
+          <i data-lucide="shield" class="w-4 h-4 text-amber-600"></i> Privacy Policy
+        </button>
+        <button onclick="mobileNav('contact')" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-amber-100/60">
+          <i data-lucide="mail" class="w-4 h-4 text-amber-600"></i> Contact Us
+        </button>
+      </nav>
+    </div>
+
+    <div id="mobileAuthContainer" class="pt-4 border-t border-amber-200"></div>
+  </aside>
+
+  <!-- MAIN DASHBOARD -->
+  <main id="page-dashboard" class="page-view w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow">
+    
+    <!-- Hero Showcase Card -->
+    <div class="card-metallic rounded-[36px] p-8 sm:p-12 mb-10 relative overflow-hidden bg-gradient-to-r from-emerald-900/10 via-amber-500/10 to-transparent border border-amber-300">
+      <div class="max-w-2xl space-y-5">
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-950 text-xs font-bold shadow-xs">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+          Ultra-Realistic Metallic Studio Engine
+        </span>
+
+        <h1 class="font-display font-extrabold text-3xl sm:text-5xl text-slate-950 leading-tight tracking-tight">
+          HIGH-END EDITING TOOLS & PRO ECOSYSTEM.
+        </h1>
+
+        <p class="text-slate-700 text-xs sm:text-sm leading-relaxed font-medium">
+          Unlock VIP video editing builds, cinematic grading masterclasses, and ultra-high frame rate LUT presets.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <button onclick="navigateTo('apks')" class="btn-metallic-gold px-7 py-3.5 rounded-2xl font-bold text-xs tracking-wider uppercase inline-flex items-center gap-2">
+            <i data-lucide="download" class="w-4 h-4"></i> Explore Pro APKs
+          </button>
+          <button onclick="navigateTo('courses')" class="btn-metallic-emerald px-7 py-3.5 rounded-2xl font-bold text-xs tracking-wider uppercase inline-flex items-center gap-2">
+            <i data-lucide="play" class="w-4 h-4"></i> Watch Masterclasses
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Preview Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="card-metallic rounded-[32px] p-6">
+        <div class="flex items-center justify-between pb-4 border-b border-amber-200/80">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-2xl bg-amber-100 text-amber-800 border border-amber-300">
+              <i data-lucide="download" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="font-display font-bold text-base text-slate-900">Latest Pro APKs</h3>
+              <p class="text-[11px] text-slate-500">Live updated build files</p>
+            </div>
+          </div>
+          <button onclick="navigateTo('apks')" class="text-xs font-bold text-amber-700 hover:underline">View Vault →</button>
+        </div>
+        <div id="homeApkPreview" class="mt-4 space-y-3"></div>
+      </div>
+
+      <div class="card-metallic rounded-[32px] p-6">
+        <div class="flex items-center justify-between pb-4 border-b border-amber-200/80">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-2xl bg-emerald-100 text-emerald-800 border border-emerald-300">
+              <i data-lucide="film" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="font-display font-bold text-base text-slate-900">Video Masterclasses</h3>
+              <p class="text-[11px] text-slate-500">Cinematic grading & VFX guides</p>
+            </div>
+          </div>
+          <button onclick="navigateTo('courses')" class="text-xs font-bold text-amber-700 hover:underline">View Vault →</button>
+        </div>
+        <div id="homeCoursePreview" class="mt-4 space-y-3"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- APKS HUB -->
+  <section id="page-apks" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-8 py-10 w-full flex-grow">
+    <div class="flex items-center justify-between gap-4 mb-8">
+      <div>
+        <h2 class="font-display font-bold text-2xl text-slate-900">Pro APK Downloads</h2>
+        <p class="text-slate-600 text-xs mt-1">Direct unlocked video editing APKs</p>
+      </div>
+      <button onclick="navigateTo('dashboard')" class="btn-metallic-silver px-4 py-2 rounded-xl text-xs font-bold">← Dashboard</button>
+    </div>
+    <div id="apksGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- COURSES HUB -->
+  <section id="page-courses" class="page-view hidden max-w-7xl mx-auto px-4 sm:px-8 py-10 w-full flex-grow">
+    <div class="flex items-center justify-between gap-4 mb-8">
+      <div>
+        <h2 class="font-display font-bold text-2xl text-slate-900">Video Masterclasses</h2>
+        <p class="text-slate-600 text-xs mt-1">Cinematic grading curves & editing guides</p>
+      </div>
+      <button onclick="navigateTo('dashboard')" class="btn-metallic-silver px-4 py-2 rounded-xl text-xs font-bold">← Dashboard</button>
+    </div>
+    <div id="coursesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- LOGIN PAGE -->
+  <section id="page-login" class="page-view hidden max-w-md mx-auto px-4 py-16 w-full flex-grow">
+    <div class="card-metallic rounded-[36px] p-8 shadow-2xl">
+      <div class="flex items-center justify-between mb-6">
+        <button onclick="navigateTo('dashboard')" class="text-xs font-bold text-slate-500 hover:text-slate-900 inline-flex items-center gap-1">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
+        </button>
+        <span class="text-[10px] font-extrabold text-amber-900 bg-amber-200 px-3 py-1 rounded-full uppercase">Secure Access</span>
+      </div>
+      <h2 class="font-display font-black text-2xl text-slate-900 mb-6 text-center">Member Login</h2>
+      <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Username</label>
+          <input type="text" id="loginUsername" required placeholder="Enter username" class="w-full bg-white border border-amber-200 rounded-2xl px-4 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:border-amber-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Password</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full bg-white border border-amber-200 rounded-2xl px-4 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:border-amber-500" />
+        </div>
+        <button type="submit" class="btn-metallic-gold w-full py-3 rounded-2xl font-bold text-xs uppercase tracking-wider">Log In</button>
+      </form>
+      <div class="mt-4 text-center text-xs text-slate-600">
+        Don't have an account? <button onclick="navigateTo('signup')" class="font-bold text-amber-700 hover:underline">Sign Up</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGN UP PAGE -->
+  <section id="page-signup" class="page-view hidden max-w-md mx-auto px-4 py-16 w-full flex-grow">
+    <div class="card-metallic rounded-[36px] p-8 shadow-2xl">
+      <div class="flex items-center justify-between mb-6">
+        <button onclick="navigateTo('dashboard')" class="text-xs font-bold text-slate-500 hover:text-slate-900 inline-flex items-center gap-1">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i> Back
+        </button>
+        <span class="text-[10px] font-extrabold text-emerald-900 bg-emerald-200 px-3 py-1 rounded-full uppercase">New Account</span>
+      </div>
+      <h2 class="font-display font-black text-2xl text-slate-900 mb-6 text-center">Create Account</h2>
+      <form onsubmit="handleSignupSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Username</label>
+          <input type="text" id="signupUsername" required placeholder="Choose username" class="w-full bg-white border border-amber-200 rounded-2xl px-4 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:border-amber-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+          <input type="email" id="signupEmail" required placeholder="creator@studio.com" class="w-full bg-white border border-amber-200 rounded-2xl px-4 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:border-amber-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Password</label>
+          <input type="password" id="signupPassword" required placeholder="At least 6 characters" class="w-full bg-white border border-amber-200 rounded-2xl px-4 py-2.5 text-xs text-slate-900 font-semibold focus:outline-none focus:border-amber-500" />
+        </div>
+        <button type="submit" class="btn-metallic-emerald w-full py-3 rounded-2xl font-bold text-xs uppercase tracking-wider">Sign Up</button>
+      </form>
+      <div class="mt-4 text-center text-xs text-slate-600">
+        Already have an account? <button onclick="navigateTo('login')" class="font-bold text-amber-700 hover:underline">Log In</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN CONTROL PANEL -->
+  <section id="page-admin" class="page-view hidden max-w-4xl mx-auto px-4 py-10 w-full flex-grow">
+    <div class="card-metallic rounded-[36px] p-6 sm:p-8 border-2 border-amber-400">
+      
+      <div class="flex items-center justify-between pb-6 border-b border-amber-200">
+        <div class="flex items-center gap-3">
+          <div class="p-3 rounded-2xl bg-amber-500 text-slate-950 font-black shadow-md border border-white">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h3 class="font-display font-black text-xl text-slate-900">Admin Control Suite</h3>
+            <p class="text-xs text-amber-800 font-bold">Publish & Sync Live Database Engine</p>
+          </div>
+        </div>
+        <button onclick="navigateTo('dashboard')" class="btn-metallic-silver px-3 py-1.5 rounded-xl text-xs font-bold">← Dashboard</button>
+      </div>
+
+      <!-- Website Logo Uploader -->
+      <div class="mt-6 p-5 rounded-2xl bg-white/80 border border-amber-300">
+        <h4 class="font-bold text-xs text-slate-900 mb-2 flex items-center gap-2">
+          <i data-lucide="image" class="w-4 h-4 text-amber-600"></i> Update Website Brand Logo
+        </h4>
+        <div class="flex items-center gap-4">
+          <div id="adminLogoPreview" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-300 to-amber-600 border border-white flex items-center justify-center overflow-hidden shrink-0 font-extrabold text-slate-950">T</div>
+          <input type="file" id="logoFileInput" accept="image/*" class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-600 file:text-white cursor-pointer" onchange="handleAdminLogoUpload(event)" />
+        </div>
+      </div>
+
+      <!-- Live Publish Form -->
+      <div class="mt-6 p-6 rounded-3xl bg-white/90 border border-amber-300 shadow-sm">
+        <h4 class="font-bold text-sm text-slate-900 mb-4 flex items-center gap-2">
+          <i data-lucide="plus-circle" class="w-4 h-4 text-amber-600"></i> Publish Resource to Live Database
+        </h4>
+        
+        <form id="adminPublishForm" onsubmit="handleAdminCreateItem(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Type</label>
+            <select id="adminType" class="w-full bg-slate-50 border border-amber-200 rounded-xl px-3 py-2 text-xs text-slate-900 font-semibold outline-none focus:border-amber-500">
+              <option value="apk">Premium APK Build</option>
+              <option value="course">Video Editing Masterclass</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Title</label>
+            <input type="text" id="adminTitle" required placeholder="e.g. WINK PRO APK" class="w-full bg-slate-50 border border-amber-200 rounded-xl px-3 py-2 text-xs text-slate-900 outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Thumbnail / Icon File</label>
+            <input type="file" id="adminItemImageFile" accept="image/*" required class="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-900 file:text-white cursor-pointer" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Download / Video Link</label>
+            <input type="text" id="adminLink" required placeholder="https://drive.google.com/..." class="w-full bg-slate-50 border border-amber-200 rounded-xl px-3 py-2 text-xs text-slate-900 outline-none focus:border-amber-500" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Description</label>
+            <textarea id="adminDesc" rows="2" required placeholder="Resource details..." class="w-full bg-slate-50 border border-amber-200 rounded-xl px-3 py-2 text-xs text-slate-900 outline-none focus:border-amber-500"></textarea>
+          </div>
+          
+          <div class="md:col-span-2 flex justify-end">
+            <button type="submit" id="publishBtn" class="btn-metallic-gold px-8 py-3 rounded-2xl font-bold text-xs flex items-center gap-2">
+              <i data-lucide="send" class="w-4 h-4"></i> Publish Now
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- JSON Sync Tools (Import/Export database.json) -->
+      <div class="mt-6 p-4 rounded-2xl bg-amber-50/80 border border-amber-200 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h5 class="text-xs font-bold text-amber-950">Database JSON Export/Backup</h5>
+          <p class="text-[10px] text-amber-800">Download live database.json or restore backup file</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="exportJSON()" class="btn-metallic-silver px-3 py-1.5 rounded-xl text-xs font-bold">Download database.json</button>
+          <button onclick="document.getElementById('importJsonFile').click()" class="btn-metallic-gold px-3 py-1.5 rounded-xl text-xs font-bold">Import JSON</button>
+          <input type="file" id="importJsonFile" accept=".json" class="hidden" onchange="importJSON(event)" />
+        </div>
+      </div>
+
+      <!-- Published Inventory Table -->
+      <div class="mt-8">
+        <h4 class="font-bold text-xs text-slate-700 mb-3">Live Items in Database Engine</h4>
+        <div class="overflow-x-auto rounded-2xl border border-amber-300 bg-white/70">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-amber-100 text-slate-800 font-extrabold border-b border-amber-300">
+              <tr>
+                <th class="p-3">Thumbnail</th>
+                <th class="p-3">Title</th>
+                <th class="p-3">Type</th>
+                <th class="p-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminInventoryTable" class="divide-y divide-amber-200"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRIVACY POLICY -->
+  <section id="page-privacy" class="page-view hidden max-w-4xl mx-auto px-4 py-12 w-full flex-grow">
+    <div class="card-metallic rounded-[36px] p-8 space-y-4 text-xs text-slate-700 leading-relaxed">
+      <h2 class="font-display font-bold text-xl text-slate-900 pb-3 border-b border-amber-200">Privacy Policy</h2>
+      <p>At TANOLI STUDIO, visitor privacy is top priority. We do not track personal files.</p>
+      <h3 class="font-bold text-slate-900 pt-2">Google AdSense Cookies</h3>
+      <p>Google uses cookies to serve ads based on visits. Read more: <a href="https://policies.google.com/technologies/ads" class="text-amber-700 underline" target="_blank">Google Ads Policy</a>.</p>
+      <p class="pt-4 border-t border-amber-200">Contact: <strong>factronix.business@gmail.com</strong></p>
+    </div>
+  </section>
+
+  <!-- CONTACT US -->
+  <section id="page-contact" class="page-view hidden max-w-md mx-auto px-4 py-16 w-full flex-grow text-center">
+    <div class="card-metallic rounded-[36px] p-8 space-y-4 shadow-xl">
+      <div class="w-12 h-12 rounded-2xl bg-amber-200 text-amber-900 flex items-center justify-center mx-auto border border-amber-400">
+        <i data-lucide="mail" class="w-6 h-6"></i>
+      </div>
+      <h2 class="font-display font-bold text-xl text-slate-900">Contact Studio Support</h2>
+      <p class="text-xs text-slate-600">For inquiries, partnerships, or assistance:</p>
+      <div class="p-4 rounded-2xl bg-amber-100/80 border border-amber-300 text-amber-950 font-extrabold text-sm select-all">
+        factronix.business@gmail.com
+      </div>
+    </div>
+  </section>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none metallic-glass rounded-2xl p-4 shadow-2xl flex items-center gap-3 border border-amber-400 max-w-sm">
+    <div class="p-2.5 rounded-xl btn-metallic-gold shrink-0">
+      <i data-lucide="check" class="w-4 h-4"></i>
+    </div>
+    <div>
+      <div id="toastTitle" class="text-xs font-bold text-slate-900">Notification</div>
+      <div id="toastMsg" class="text-[11px] text-slate-600">Success.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="w-full py-6 px-4 text-center text-xs text-slate-600 border-t border-amber-200/80 mt-10 metallic-glass">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span class="font-display font-bold text-slate-900">TANOLI STUDIO</span>
+        <span>• Ultra-Premium Resource Vault</span>
+      </div>
+      <div class="flex gap-4 font-semibold">
+        <button onclick="navigateTo('privacy')" class="hover:text-amber-800">Privacy Policy</button>
+        <button onclick="navigateTo('contact')" class="hover:text-amber-800">Contact</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT ENGINE -->
+  <script>
+    const DB_KEY = 'tanoli_virtual_db';
+
+    function getDB() {
+      const stored = localStorage.getItem(DB_KEY);
+      if (!stored) {
+        const initial = { apks: [], courses: [], logo: '' };
+        localStorage.setItem(DB_KEY, JSON.stringify(initial));
+        return initial;
+      }
+      return JSON.parse(stored);
+    }
+
+    function saveDB(data) {
+      localStorage.setItem(DB_KEY, JSON.stringify(data));
+    }
+
+    function loadSiteLogo() {
+      const db = getDB();
+      const logoContainers = [
+        document.getElementById('siteLogoContainer'),
+        document.getElementById('adminLogoPreview')
+      ];
+      logoContainers.forEach(container => {
+        if (!container) return;
+        if (db.logo) {
+          container.innerHTML = `<img src="${db.logo}" alt="Logo" class="w-full h-full object-cover" />`;
+        } else {
+          container.innerHTML = `T`;
+        }
+      });
+    }
+
+    function handleAdminLogoUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const db = getDB();
+        db.logo = evt.target.result;
+        saveDB(db);
+        loadSiteLogo();
+        showToast('Logo Saved', 'Website logo updated instantly!');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function navigateTo(pageId) {
+      const loader = document.getElementById('pageLoader');
+      loader.classList.remove('opacity-0', 'pointer-events-none');
+
+      setTimeout(() => {
+        document.querySelectorAll('.page-view').forEach(view => view.classList.add('hidden'));
+        const target = document.getElementById(`page-${pageId}`);
+        if (target) {
+          target.classList.remove('hidden');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const db = getDB();
+        if (pageId === 'dashboard') renderHomePreviews(db);
+        if (pageId === 'apks' || pageId === 'courses') renderCards(db);
+        if (pageId === 'admin') renderAdminInventory(db);
+        
+        loader.classList.add('opacity-0', 'pointer-events-none');
+      }, 180);
+    }
+
+    function toggleMobileDrawer() {
+      const drawer = document.getElementById('mobileDrawer');
+      const backdrop = document.getElementById('mobileDrawerBackdrop');
+      drawer.classList.toggle('drawer-closed');
+      drawer.classList.toggle('drawer-open');
+      backdrop.classList.toggle('hidden');
+    }
+
+    function mobileNav(page) {
+      toggleMobileDrawer();
+      navigateTo(page);
+    }
+
+    function renderNavAuth() {
+      const desktopAuth = document.getElementById('desktopAuthContainer');
+      const mobileAuth = document.getElementById('mobileAuthContainer');
+      const user = getCurrentUser();
+
+      if (user) {
+        desktopAuth.innerHTML = `
+          <div class="flex items-center gap-2">
+            ${user.isAdmin ? `<button onclick="navigateTo('admin')" class="btn-metallic-gold px-3.5 py-1.5 rounded-xl font-bold text-xs">Admin Panel</button>` : ''}
+            <span class="text-xs font-bold text-slate-900 px-3 py-1.5 bg-white rounded-xl border border-amber-300 shadow-xs">${user.username}</span>
+            <button onclick="handleLogout()" class="p-2 rounded-xl bg-red-100 text-red-700 hover:bg-red-200" title="Logout"><i data-lucide="log-out" class="w-4 h-4"></i></button>
+          </div>
+        `;
+      } else {
+        desktopAuth.innerHTML = `
+          <div class="flex items-center gap-2">
+            <button onclick="navigateTo('login')" class="btn-metallic-silver px-4 py-2 rounded-xl text-xs font-bold">Log In</button>
+            <button onclick="navigateTo('signup')" class="btn-metallic-gold px-4 py-2 rounded-xl text-xs font-bold">Sign Up</button>
+          </div>
+        `;
+      }
+      lucide.createIcons();
+    }
+
+    function getCurrentUser() {
+      const data = localStorage.getItem('tanoli_auth_user');
+      return data ? JSON.parse(data) : null;
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const userVal = document.getElementById('loginUsername').value.trim();
+      const passVal = document.getElementById('loginPassword').value.trim();
+
+      if (userVal === 'Tanoli' && passVal === 'tanoli101') {
+        const adminUser = { username: 'Tanoli', isAdmin: true };
+        localStorage.setItem('tanoli_auth_user', JSON.stringify(adminUser));
+        renderNavAuth();
+        navigateTo('admin');
+        showToast('Admin Mode', 'Welcome Admin!');
+        return;
+      }
+
+      const userObj = { username: userVal, isAdmin: false };
+      localStorage.setItem('tanoli_auth_user', JSON.stringify(userObj));
+      renderNavAuth();
+      navigateTo('dashboard');
+      showToast('Welcome', `Logged in as ${userVal}`);
+    }
+
+    function handleSignupSubmit(e) {
+      e.preventDefault();
+      const username = document.getElementById('signupUsername').value.trim();
+      const newUser = { username, isAdmin: false };
+      localStorage.setItem('tanoli_auth_user', JSON.stringify(newUser));
+      renderNavAuth();
+      navigateTo('dashboard');
+      showToast('Account Created', `Welcome ${username}!`);
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('tanoli_auth_user');
+      renderNavAuth();
+      navigateTo('dashboard');
+      showToast('Signed Out', 'Logged out safely.');
+    }
+
+    function handleAdminCreateItem(e) {
+      e.preventDefault();
+      const type = document.getElementById('adminType').value;
+      const title = document.getElementById('adminTitle').value.trim();
+      const link = document.getElementById('adminLink').value.trim();
+      const desc = document.getElementById('adminDesc').value.trim();
+      const imageFile = document.getElementById('adminItemImageFile').files[0];
+
+      if (!imageFile) {
+        showToast('Error', 'Please select a thumbnail image!');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const db = getDB();
+        const newItem = {
+          id: 'item-' + Date.now(),
+          title,
+          image: evt.target.result,
+          link,
+          desc,
+          date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+        };
+
+        if (type === 'apk') {
+          db.apks.unshift(newItem);
+        } else {
+          db.courses.unshift(newItem);
+        }
+
+        saveDB(db);
+        document.getElementById('adminPublishForm').reset();
+        
+        renderAdminInventory(db);
+        renderCards(db);
+        renderHomePreviews(db);
+        showToast('Published!', `"${title}" is now live on website.`);
+      };
+      reader.readAsDataURL(imageFile);
+    }
+
+    function adminDeleteItem(type, id) {
+      const db = getDB();
+      if (type === 'apk') {
+        db.apks = db.apks.filter(a => a.id !== id);
+      } else {
+        db.courses = db.courses.filter(c => c.id !== id);
+      }
+      saveDB(db);
+      renderAdminInventory(db);
+      renderCards(db);
+      renderHomePreviews(db);
+      showToast('Deleted', 'Resource removed.');
+    }
+
+    function renderCards(db) {
+      const apksContainer = document.getElementById('apksGrid');
+      const apks = db.apks || [];
+      if (apks.length === 0) {
+        apksContainer.innerHTML = `<p class="col-span-full text-center text-slate-500 py-12">No APKs uploaded yet.</p>`;
+      } else {
+        apksContainer.innerHTML = apks.map(app => `
+          <div class="card-metallic rounded-[28px] p-5 flex flex-col justify-between">
+            <div>
+              <div class="h-44 rounded-2xl overflow-hidden mb-4 bg-slate-100 border border-amber-200">
+                <img src="${app.image}" class="w-full h-full object-cover">
+              </div>
+              <h3 class="font-display font-bold text-base text-slate-900 mb-1">${app.title}</h3>
+              <p class="text-xs text-slate-600 line-clamp-2">${app.desc}</p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-amber-200/80 flex items-center justify-between">
+              <a href="${app.link}" target="_blank" class="btn-metallic-gold px-4 py-2 rounded-xl font-bold text-xs inline-flex items-center gap-1.5"><i data-lucide="download" class="w-3.5 h-3.5"></i> Download</a>
+              <span class="text-[10px] text-slate-500 font-bold">${app.date}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      const coursesContainer = document.getElementById('coursesGrid');
+      const courses = db.courses || [];
+      if (courses.length === 0) {
+        coursesContainer.innerHTML = `<p class="col-span-full text-center text-slate-500 py-12">No Masterclasses uploaded yet.</p>`;
+      } else {
+        coursesContainer.innerHTML = courses.map(course => `
+          <div class="card-metallic rounded-[28px] p-5 flex flex-col justify-between">
+            <div>
+              <div class="h-44 rounded-2xl overflow-hidden mb-4 bg-slate-100 border border-amber-200">
+                <img src="${course.image}" class="w-full h-full object-cover">
+              </div>
+              <h3 class="font-display font-bold text-base text-slate-900 mb-1">${course.title}</h3>
+              <p class="text-xs text-slate-600 line-clamp-2">${course.desc}</p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-amber-200/80 flex items-center justify-between">
+              <a href="${course.link}" target="_blank" class="btn-metallic-emerald px-4 py-2 rounded-xl font-bold text-xs inline-flex items-center gap-1.5"><i data-lucide="play" class="w-3.5 h-3.5"></i> Watch Guide</a>
+              <span class="text-[10px] text-slate-500 font-bold">${course.date}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+      lucide.createIcons();
+    }
+
+    function renderHomePreviews(db) {
+      const apkPreview = document.getElementById('homeApkPreview');
+      const coursePreview = document.getElementById('homeCoursePreview');
+      const apks = db.apks || [];
+      const courses = db.courses || [];
+
+      apkPreview.innerHTML = apks.length === 0 ? `<p class="text-xs text-slate-500 py-2">No APKs uploaded.</p>` : apks.slice(0, 3).map(a => `
+        <div onclick="navigateTo('apks')" class="p-3 rounded-2xl bg-white/80 hover:bg-white border border-amber-200 flex items-center justify-between cursor-pointer shadow-xs">
+          <div class="flex items-center gap-3"><img src="${a.image}" class="w-9 h-9 rounded-xl object-cover" /><div class="text-xs font-bold text-slate-900">${a.title}</div></div>
+          <i data-lucide="download" class="w-4 h-4 text-amber-600"></i>
+        </div>
+      `).join('');
+
+      coursePreview.innerHTML = courses.length === 0 ? `<p class="text-xs text-slate-500 py-2">No Masterclasses uploaded.</p>` : courses.slice(0, 3).map(c => `
+        <div onclick="navigateTo('courses')" class="p-3 rounded-2xl bg-white/80 hover:bg-white border border-amber-200 flex items-center justify-between cursor-pointer shadow-xs">
+          <div class="flex items-center gap-3"><img src="${c.image}" class="w-9 h-9 rounded-xl object-cover" /><div class="text-xs font-bold text-slate-900">${c.title}</div></div>
+          <i data-lucide="play" class="w-4 h-4 text-emerald-600"></i>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function renderAdminInventory(db) {
+      const user = getCurrentUser();
+      if (!user || !user.isAdmin) { navigateTo('dashboard'); return; }
+      const table = document.getElementById('adminInventoryTable');
+      const apks = db.apks || [];
+      const courses = db.courses || [];
+      let rows = '';
+
+      if (apks.length === 0 && courses.length === 0) {
+        table.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500">No items found in database.</td></tr>`;
+        return;
+      }
+
+      apks.forEach(app => {
+        rows += `<tr class="hover:bg-amber-50"><td class="p-3"><img src="${app.image}" class="w-8 h-8 rounded-lg object-cover" /></td><td class="p-3 font-bold text-slate-800">${app.title}</td><td class="p-3 text-amber-800 font-bold">APK</td><td class="p-3 text-right"><button onclick="adminDeleteItem('apk', '${app.id}')" class="text-red-600 hover:text-red-800 font-bold">Delete</button></td></tr>`;
+      });
+      courses.forEach(c => {
+        rows += `<tr class="hover:bg-amber-50"><td class="p-3"><img src="${c.image}" class="w-8 h-8 rounded-lg object-cover" /></td><td class="p-3 font-bold text-slate-800">${c.title}</td><td class="p-3 text-emerald-800 font-bold">Masterclass</td><td class="p-3 text-right"><button onclick="adminDeleteItem('course', '${c.id}')" class="text-red-600 hover:text-red-800 font-bold">Delete</button></td></tr>`;
+      });
+      table.innerHTML = rows;
+    }
+
+    function exportJSON() {
+      const db = getDB();
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "database.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function importJSON(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const parsed = JSON.parse(evt.target.result);
+          saveDB(parsed);
+          loadSiteLogo();
+          const db = getDB();
+          renderAdminInventory(db);
+          renderCards(db);
+          renderHomePreviews(db);
+          showToast('Imported!', 'database.json loaded successfully.');
+        } catch(err) {
+          showToast('Error', 'Invalid JSON file.');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function handleSearch(query) {
+      const q = query.toLowerCase();
+      const db = getDB();
+      if (!q) { renderCards(db); return; }
+      navigateTo('apks');
+      const filtered = (db.apks || []).filter(a => a.title.toLowerCase().includes(q));
+      const apksContainer = document.getElementById('apksGrid');
+      apksContainer.innerHTML = filtered.length === 0 ? `<p class="col-span-full text-center text-xs text-slate-500 py-8">No results matching "${query}"</p>` : filtered.map(app => `
+        <div class="card-metallic rounded-[28px] p-5">
+          <h3 class="font-bold text-slate-900">${app.title}</h3>
+          <p class="text-xs text-slate-600 mt-1">${app.desc}</p>
+          <a href="${app.link}" target="_blank" class="btn-metallic-gold px-4 py-2 mt-4 rounded-xl text-xs font-bold inline-block">Download APK</a>
+        </div>
+      `).join('');
+    }
+
+    function showToast(title, msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastTitle').innerText = title;
+      document.getElementById('toastMsg').innerText = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3500);
+    }
+
+    // Initialize App
+    loadSiteLogo();
+    renderNavAuth();
+    const currentDB = getDB();
+    renderHomePreviews(currentDB);
+    renderCards(currentDB);
+    lucide.createIcons();
+  </script>
+</body>
+</html>
