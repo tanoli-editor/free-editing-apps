@@ -36,7 +36,6 @@
   </script>
 
   <style>
-    /* Ultra-Realistic Light Metallic Ambient Background */
     body {
       background: radial-gradient(circle at 50% 10%, #F4F8F5 0%, #E2ECE5 45%, #D0DFD6 100%);
       color: #1E293B;
@@ -44,16 +43,14 @@
       overflow-x: hidden;
     }
 
-    /* Metallic Heavy Glassmorphism Panel */
     .metallic-glass {
-      background: rgba(255, 255, 255, 0.75);
+      background: rgba(255, 255, 255, 0.78);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      box-shadow: 0 20px 50px -15px rgba(15, 60, 40, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 20px 50px -15px rgba(15, 60, 40, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.9);
     }
 
-    /* Metallic Gold & Emerald Buttons */
     .btn-metallic-gold {
       background: linear-gradient(135deg, #FFE89C 0%, #D4AF37 50%, #A07C1C 100%);
       color: #1A1300;
@@ -105,11 +102,10 @@
       background: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 100%);
     }
 
-    /* Metallic Border Card */
     .card-metallic {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(212, 175, 55, 0.35);
       box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.08);
       transition: all 0.3s ease;
     }
@@ -127,20 +123,20 @@
 <body class="font-sans antialiased selection:bg-amber-300 selection:text-amber-950 flex flex-col justify-between min-h-screen">
 
   <!-- PAGE LOADING OVERLAY -->
-  <div id="pageLoader" class="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-    <div class="metallic-glass p-6 rounded-3xl flex items-center gap-3.5 shadow-2xl border border-white/80">
+  <div id="pageLoader" class="fixed inset-0 bg-slate-900/30 backdrop-blur-md z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="metallic-glass p-6 rounded-3xl flex items-center gap-3.5 shadow-2xl border border-white/90">
       <i data-lucide="loader-2" class="w-6 h-6 animate-spin text-amber-600"></i>
       <span class="text-xs font-bold text-slate-900 tracking-wider uppercase">Loading Vault Engine...</span>
     </div>
   </div>
 
   <!-- HEADER -->
-  <header class="w-full sticky top-0 z-40 metallic-glass border-b border-white/80">
+  <header class="w-full sticky top-0 z-40 metallic-glass border-b border-white/90">
     <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between gap-4">
       
       <!-- LOGO -->
       <a href="javascript:void(0)" onclick="navigateTo('dashboard')" class="flex items-center gap-3 group">
-        <div id="siteLogoContainer" class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 flex items-center justify-center text-slate-950 font-display font-extrabold text-2xl shadow-md overflow-hidden shrink-0 border border-white/60">
+        <div id="siteLogoContainer" class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 flex items-center justify-center text-slate-950 font-display font-extrabold text-2xl shadow-md overflow-hidden shrink-0 border border-white/80">
           T
         </div>
         <div class="flex flex-col">
@@ -152,7 +148,7 @@
       </a>
 
       <!-- NAVIGATION BAR -->
-      <nav class="hidden md:flex items-center gap-1.5 bg-white/40 p-1.5 rounded-2xl border border-white/80 shadow-inner">
+      <nav class="hidden md:flex items-center gap-1.5 bg-white/50 p-1.5 rounded-2xl border border-white/90 shadow-inner">
         <button onclick="navigateTo('dashboard')" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition-all btn-metallic-gold" data-page="dashboard">Dashboard</button>
         <button onclick="navigateTo('apks')" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-800 hover:bg-white/80 transition-all" data-page="apks">Pro APKs</button>
         <button onclick="navigateTo('courses')" class="nav-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-800 hover:bg-white/80 transition-all" data-page="courses">Masterclasses</button>
@@ -166,7 +162,7 @@
             type="text" 
             placeholder="Search vault..." 
             oninput="handleSearch(this.value)"
-            class="w-full bg-white/70 border border-white/90 focus:border-amber-500 focus:bg-white rounded-2xl pl-9 pr-4 py-2 text-xs text-slate-900 placeholder-slate-500 outline-none transition-all shadow-inner"
+            class="w-full bg-white/80 border border-white rounded-2xl pl-9 pr-4 py-2 text-xs text-slate-900 placeholder-slate-500 outline-none transition-all shadow-inner"
           />
         </div>
 
@@ -181,7 +177,7 @@
   </header>
 
   <!-- MOBILE SIDE MENU -->
-  <div id="mobileDrawerBackdrop" onclick="toggleMobileDrawer()" class="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-50 hidden"></div>
+  <div id="mobileDrawerBackdrop" onclick="toggleMobileDrawer()" class="fixed inset-0 bg-slate-950/40 backdrop-blur-sm z-50 hidden"></div>
   <aside id="mobileDrawer" class="fixed top-0 left-0 bottom-0 w-72 bg-white/95 backdrop-blur-2xl z-50 p-6 shadow-2xl flex flex-col justify-between drawer-closed transition-transform duration-300 border-r border-amber-200 md:hidden">
     <div>
       <div class="flex items-center justify-between pb-6 border-b border-amber-200">
@@ -222,12 +218,11 @@
   <!-- MAIN DASHBOARD -->
   <main id="page-dashboard" class="page-view w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow">
     
-    <!-- Hero Showcase Card -->
     <div class="card-metallic rounded-[36px] p-8 sm:p-12 mb-10 relative overflow-hidden bg-gradient-to-r from-emerald-900/10 via-amber-500/10 to-transparent border border-amber-300">
       <div class="max-w-2xl space-y-5">
         <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-950 text-xs font-bold shadow-xs">
           <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
-          Ultra-Realistic Metallic Studio Engine
+          JSONBin.io Global Cloud Sync Active
         </span>
 
         <h1 class="font-display font-extrabold text-3xl sm:text-5xl text-slate-950 leading-tight tracking-tight">
@@ -249,7 +244,6 @@
       </div>
     </div>
 
-    <!-- Live Preview Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="card-metallic rounded-[32px] p-6">
         <div class="flex items-center justify-between pb-4 border-b border-amber-200/80">
@@ -259,7 +253,7 @@
             </div>
             <div>
               <h3 class="font-display font-bold text-base text-slate-900">Latest Pro APKs</h3>
-              <p class="text-[11px] text-slate-500">Live updated build files</p>
+              <p class="text-[11px] text-slate-500">Cloud synced build files</p>
             </div>
           </div>
           <button onclick="navigateTo('apks')" class="text-xs font-bold text-amber-700 hover:underline">View Vault →</button>
@@ -378,7 +372,7 @@
           </div>
           <div>
             <h3 class="font-display font-black text-xl text-slate-900">Admin Control Suite</h3>
-            <p class="text-xs text-amber-800 font-bold">Publish & Sync Live Database Engine</p>
+            <p class="text-xs text-amber-800 font-bold">Cloud Sync via JSONBin.io</p>
           </div>
         </div>
         <button onclick="navigateTo('dashboard')" class="btn-metallic-silver px-3 py-1.5 rounded-xl text-xs font-bold">← Dashboard</button>
@@ -398,7 +392,7 @@
       <!-- Live Publish Form -->
       <div class="mt-6 p-6 rounded-3xl bg-white/90 border border-amber-300 shadow-sm">
         <h4 class="font-bold text-sm text-slate-900 mb-4 flex items-center gap-2">
-          <i data-lucide="plus-circle" class="w-4 h-4 text-amber-600"></i> Publish Resource to Live Database
+          <i data-lucide="plus-circle" class="w-4 h-4 text-amber-600"></i> Publish Resource to Cloud Database
         </h4>
         
         <form id="adminPublishForm" onsubmit="handleAdminCreateItem(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -434,22 +428,9 @@
         </form>
       </div>
 
-      <!-- JSON Sync Tools (Import/Export database.json) -->
-      <div class="mt-6 p-4 rounded-2xl bg-amber-50/80 border border-amber-200 flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h5 class="text-xs font-bold text-amber-950">Database JSON Export/Backup</h5>
-          <p class="text-[10px] text-amber-800">Download live database.json or restore backup file</p>
-        </div>
-        <div class="flex gap-2">
-          <button onclick="exportJSON()" class="btn-metallic-silver px-3 py-1.5 rounded-xl text-xs font-bold">Download database.json</button>
-          <button onclick="document.getElementById('importJsonFile').click()" class="btn-metallic-gold px-3 py-1.5 rounded-xl text-xs font-bold">Import JSON</button>
-          <input type="file" id="importJsonFile" accept=".json" class="hidden" onchange="importJSON(event)" />
-        </div>
-      </div>
-
       <!-- Published Inventory Table -->
       <div class="mt-8">
-        <h4 class="font-bold text-xs text-slate-700 mb-3">Live Items in Database Engine</h4>
+        <h4 class="font-bold text-xs text-slate-700 mb-3">Live Items in Cloud Database</h4>
         <div class="overflow-x-auto rounded-2xl border border-amber-300 bg-white/70">
           <table class="w-full text-left text-xs">
             <thead class="bg-amber-100 text-slate-800 font-extrabold border-b border-amber-300">
@@ -518,37 +499,70 @@
     </div>
   </footer>
 
-  <!-- JAVASCRIPT ENGINE -->
+  <!-- JSONBin.io CLOUD ENGINE -->
   <script>
-    const DB_KEY = 'tanoli_virtual_db';
+    const BIN_ID = '6ad9bc6bac6210605a48256b';
+    const API_KEY = '$2a$10$/eJUTQHUshvFDApZd.3L.Os083HZmHStEigNf0F6m6AGPkRsKK.Ku';
 
-    function getDB() {
-      const stored = localStorage.getItem(DB_KEY);
-      if (!stored) {
-        const initial = { apks: [], courses: [], logo: '' };
-        localStorage.setItem(DB_KEY, JSON.stringify(initial));
-        return initial;
-      }
-      return JSON.parse(stored);
+    let globalDB = { apks: [], courses: [], logo: '' };
+
+    function fetchDBData(callback) {
+      fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+        headers: { 'X-Master-Key': API_KEY }
+      })
+      .then(res => res.json())
+      .then(data => {
+        globalDB = data.record || { apks: [], courses: [], logo: '' };
+        if (callback) callback(globalDB);
+      })
+      .catch(err => {
+        console.error('Cloud fetch error:', err);
+        // Fallback local
+        let local = localStorage.getItem('tanoli_virtual_db');
+        if (local) {
+          globalDB = JSON.parse(local);
+          if (callback) callback(globalDB);
+        }
+      });
     }
 
-    function saveDB(data) {
-      localStorage.setItem(DB_KEY, JSON.stringify(data));
+    function saveDB(data, successCallback) {
+      fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Master-Key': API_KEY
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(() => {
+        globalDB = data;
+        localStorage.setItem('tanoli_virtual_db', JSON.stringify(data));
+        if (successCallback) successCallback();
+      })
+      .catch(err => {
+        console.error('Cloud save error:', err);
+        globalDB = data;
+        localStorage.setItem('tanoli_virtual_db', JSON.stringify(data));
+        if (successCallback) successCallback();
+      });
     }
 
     function loadSiteLogo() {
-      const db = getDB();
-      const logoContainers = [
-        document.getElementById('siteLogoContainer'),
-        document.getElementById('adminLogoPreview')
-      ];
-      logoContainers.forEach(container => {
-        if (!container) return;
-        if (db.logo) {
-          container.innerHTML = `<img src="${db.logo}" alt="Logo" class="w-full h-full object-cover" />`;
-        } else {
-          container.innerHTML = `T`;
-        }
+      fetchDBData(db => {
+        const logoContainers = [
+          document.getElementById('siteLogoContainer'),
+          document.getElementById('adminLogoPreview')
+        ];
+        logoContainers.forEach(container => {
+          if (!container) return;
+          if (db.logo) {
+            container.innerHTML = `<img src="${db.logo}" alt="Logo" class="w-full h-full object-cover" />`;
+          } else {
+            container.innerHTML = `T`;
+          }
+        });
       });
     }
 
@@ -557,11 +571,13 @@
       if (!file) return;
       const reader = new FileReader();
       reader.onload = function(evt) {
-        const db = getDB();
-        db.logo = evt.target.result;
-        saveDB(db);
-        loadSiteLogo();
-        showToast('Logo Saved', 'Website logo updated instantly!');
+        fetchDBData(db => {
+          db.logo = evt.target.result;
+          saveDB(db, () => {
+            loadSiteLogo();
+            showToast('Logo Saved', 'Website logo updated globally!');
+          });
+        });
       };
       reader.readAsDataURL(file);
     }
@@ -578,12 +594,13 @@
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        const db = getDB();
-        if (pageId === 'dashboard') renderHomePreviews(db);
-        if (pageId === 'apks' || pageId === 'courses') renderCards(db);
-        if (pageId === 'admin') renderAdminInventory(db);
-        
-        loader.classList.add('opacity-0', 'pointer-events-none');
+        fetchDBData(db => {
+          if (pageId === 'dashboard') renderHomePreviews(db);
+          if (pageId === 'apks' || pageId === 'courses') renderCards(db);
+          if (pageId === 'admin') renderAdminInventory(db);
+          
+          loader.classList.add('opacity-0', 'pointer-events-none');
+        });
       }, 180);
     }
 
@@ -682,45 +699,48 @@
 
       const reader = new FileReader();
       reader.onload = function(evt) {
-        const db = getDB();
-        const newItem = {
-          id: 'item-' + Date.now(),
-          title,
-          image: evt.target.result,
-          link,
-          desc,
-          date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-        };
+        fetchDBData(db => {
+          const newItem = {
+            id: 'item-' + Date.now(),
+            title,
+            image: evt.target.result,
+            link,
+            desc,
+            date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+          };
 
-        if (type === 'apk') {
-          db.apks.unshift(newItem);
-        } else {
-          db.courses.unshift(newItem);
-        }
+          if (type === 'apk') {
+            db.apks.unshift(newItem);
+          } else {
+            db.courses.unshift(newItem);
+          }
 
-        saveDB(db);
-        document.getElementById('adminPublishForm').reset();
-        
-        renderAdminInventory(db);
-        renderCards(db);
-        renderHomePreviews(db);
-        showToast('Published!', `"${title}" is now live on website.`);
+          saveDB(db, () => {
+            document.getElementById('adminPublishForm').reset();
+            renderAdminInventory(db);
+            renderCards(db);
+            renderHomePreviews(db);
+            showToast('Published!', `"${title}" is now live globally.`);
+          });
+        });
       };
       reader.readAsDataURL(imageFile);
     }
 
     function adminDeleteItem(type, id) {
-      const db = getDB();
-      if (type === 'apk') {
-        db.apks = db.apks.filter(a => a.id !== id);
-      } else {
-        db.courses = db.courses.filter(c => c.id !== id);
-      }
-      saveDB(db);
-      renderAdminInventory(db);
-      renderCards(db);
-      renderHomePreviews(db);
-      showToast('Deleted', 'Resource removed.');
+      fetchDBData(db => {
+        if (type === 'apk') {
+          db.apks = db.apks.filter(a => a.id !== id);
+        } else {
+          db.courses = db.courses.filter(c => c.id !== id);
+        }
+        saveDB(db, () => {
+          renderAdminInventory(db);
+          renderCards(db);
+          renderHomePreviews(db);
+          showToast('Deleted', 'Resource removed from cloud.');
+        });
+      });
     }
 
     function renderCards(db) {
@@ -814,52 +834,21 @@
       table.innerHTML = rows;
     }
 
-    function exportJSON() {
-      const db = getDB();
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", "database.json");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-    }
-
-    function importJSON(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        try {
-          const parsed = JSON.parse(evt.target.result);
-          saveDB(parsed);
-          loadSiteLogo();
-          const db = getDB();
-          renderAdminInventory(db);
-          renderCards(db);
-          renderHomePreviews(db);
-          showToast('Imported!', 'database.json loaded successfully.');
-        } catch(err) {
-          showToast('Error', 'Invalid JSON file.');
-        }
-      };
-      reader.readAsText(file);
-    }
-
     function handleSearch(query) {
       const q = query.toLowerCase();
-      const db = getDB();
-      if (!q) { renderCards(db); return; }
-      navigateTo('apks');
-      const filtered = (db.apks || []).filter(a => a.title.toLowerCase().includes(q));
-      const apksContainer = document.getElementById('apksGrid');
-      apksContainer.innerHTML = filtered.length === 0 ? `<p class="col-span-full text-center text-xs text-slate-500 py-8">No results matching "${query}"</p>` : filtered.map(app => `
-        <div class="card-metallic rounded-[28px] p-5">
-          <h3 class="font-bold text-slate-900">${app.title}</h3>
-          <p class="text-xs text-slate-600 mt-1">${app.desc}</p>
-          <a href="${app.link}" target="_blank" class="btn-metallic-gold px-4 py-2 mt-4 rounded-xl text-xs font-bold inline-block">Download APK</a>
-        </div>
-      `).join('');
+      fetchDBData(db => {
+        if (!q) { renderCards(db); return; }
+        navigateTo('apks');
+        const filtered = (db.apks || []).filter(a => a.title.toLowerCase().includes(q));
+        const apksContainer = document.getElementById('apksGrid');
+        apksContainer.innerHTML = filtered.length === 0 ? `<p class="col-span-full text-center text-xs text-slate-500 py-8">No results matching "${query}"</p>` : filtered.map(app => `
+          <div class="card-metallic rounded-[28px] p-5">
+            <h3 class="font-bold text-slate-900">${app.title}</h3>
+            <p class="text-xs text-slate-600 mt-1">${app.desc}</p>
+            <a href="${app.link}" target="_blank" class="btn-metallic-gold px-4 py-2 mt-4 rounded-xl text-xs font-bold inline-block">Download APK</a>
+          </div>
+        `).join('');
+      });
     }
 
     function showToast(title, msg) {
@@ -873,9 +862,10 @@
     // Initialize App
     loadSiteLogo();
     renderNavAuth();
-    const currentDB = getDB();
-    renderHomePreviews(currentDB);
-    renderCards(currentDB);
+    fetchDBData(db => {
+      renderHomePreviews(db);
+      renderCards(db);
+    });
     lucide.createIcons();
   </script>
 </body>
