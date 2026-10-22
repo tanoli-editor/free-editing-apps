@@ -501,14 +501,17 @@
 
   <!-- JSONBin.io CLOUD ENGINE -->
   <script>
-    const BIN_ID = '6ad9bc6bac6210605a48256b';
+    const BIN_ID = '6ad9c194ffd5d1605381e220';
     const API_KEY = '$2a$10$/eJUTQHUshvFDApZd.3L.Os083HZmHStEigNf0F6m6AGPkRsKK.Ku';
 
     let globalDB = { apks: [], courses: [], logo: '' };
 
     function fetchDBData(callback) {
       fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-        headers: { 'X-Master-Key': API_KEY }
+        headers: { 
+          'X-Master-Key': API_KEY,
+          'X-Access-Key': API_KEY
+        }
       })
       .then(res => res.json())
       .then(data => {
@@ -517,7 +520,6 @@
       })
       .catch(err => {
         console.error('Cloud fetch error:', err);
-        // Fallback local
         let local = localStorage.getItem('tanoli_virtual_db');
         if (local) {
           globalDB = JSON.parse(local);
@@ -619,7 +621,6 @@
 
     function renderNavAuth() {
       const desktopAuth = document.getElementById('desktopAuthContainer');
-      const mobileAuth = document.getElementById('mobileAuthContainer');
       const user = getCurrentUser();
 
       if (user) {
